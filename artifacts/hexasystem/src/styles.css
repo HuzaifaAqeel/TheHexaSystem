@@ -740,46 +740,44 @@ a {
   padding: 12px 26px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(135deg, var(--lime) 0%, var(--green) 100%);
+  background: linear-gradient(135deg, var(--lime) 0%, #7cee3a 100%);
   color: var(--black);
   font-family: 'Google Sans', 'Outfit', sans-serif;
   font-size: 0.84rem;
   font-weight: 900;
   text-transform: none;
   cursor: pointer;
-  transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow:
-    0 8px 28px rgba(173, 255, 53, 0.35),
-    0 0 0 0 rgba(173, 255, 53, 0);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+  box-shadow: 0 20px 44px rgba(173, 255, 53, 0.28);
   text-decoration: none;
   position: relative;
   overflow: hidden;
 }
 
-.card-contact-btn::before {
+.card-contact-btn::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.48), transparent 48%);
+  transform: translateX(-130%);
+  transition: transform 520ms ease;
   border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.22s ease;
 }
 
 .card-contact-btn:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow:
-    0 16px 42px rgba(173, 255, 53, 0.55),
-    0 0 0 4px rgba(173, 255, 53, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(173, 255, 53, 0.38);
   color: var(--black);
 }
 
-.card-contact-btn:hover::before {
-  opacity: 1;
+.card-contact-btn:hover::after {
+  transform: translateX(130%);
 }
 
 .card-contact-btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0);
 }
 
 .card-contact-btn .arrow {
