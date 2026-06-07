@@ -4008,3 +4008,456 @@ a {
     border-bottom: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   BOOK-A-CALL WIDGET
+   ═══════════════════════════════════════════════════════════ */
+
+.bca-section {
+  padding: 96px max(22px, calc((100vw - 860px) / 2));
+  background: #08142e;
+  text-align: center;
+}
+
+/* ── Header ── */
+.bca-header {
+  margin-bottom: 52px;
+}
+
+.bca-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #adff35;
+}
+
+.bca-kicker-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: #adff35;
+  opacity: 0.55;
+}
+
+.bca-title {
+  margin: 0 0 14px;
+  font-family: 'Changa One', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.bca-title span {
+  color: #adff35;
+}
+
+.bca-sub {
+  margin: 0;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  color: #adff35;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* ── Card ── */
+.bca-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(173, 255, 53, 0.14);
+  border-radius: 28px;
+  padding: 40px 40px 44px;
+  backdrop-filter: blur(12px);
+  text-align: left;
+  max-width: 860px;
+  margin: 0 auto;
+  min-height: 220px;
+  box-shadow:
+    0 0 0 1px rgba(173, 255, 53, 0.06) inset,
+    0 40px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Week Nav ── */
+.bca-week-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.bca-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bca-nav-btn:hover:not(:disabled) {
+  border-color: #adff35;
+  color: #adff35;
+  background: rgba(173, 255, 53, 0.08);
+}
+
+.bca-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.bca-week-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Day Buttons ── */
+.bca-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.bca-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.bca-day:hover {
+  border-color: rgba(173, 255, 53, 0.35);
+  background: rgba(173, 255, 53, 0.06);
+  color: #ffffff;
+}
+
+.bca-day-active {
+  background: #adff35 !important;
+  border-color: #adff35 !important;
+  color: #07130a !important;
+  box-shadow: 0 8px 28px rgba(173, 255, 53, 0.35);
+}
+
+.bca-day-abbr {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.bca-day-active .bca-day-abbr {
+  opacity: 1;
+}
+
+.bca-day-num {
+  font-family: 'Changa One', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* ── Placeholder text ── */
+.bca-placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.92rem;
+  padding: 16px 0 4px;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── Times ── */
+.bca-times-wrapper {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 26px;
+  margin-top: 4px;
+}
+
+.bca-times-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #adff35;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.bca-times {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.bca-time {
+  padding: 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 200ms ease;
+  text-align: center;
+}
+
+.bca-time:hover {
+  border-color: rgba(173, 255, 53, 0.35);
+  background: rgba(173, 255, 53, 0.07);
+  color: #ffffff;
+}
+
+.bca-time-active {
+  border-color: #adff35 !important;
+  background: rgba(173, 255, 53, 0.15) !important;
+  color: #adff35 !important;
+  box-shadow: 0 4px 16px rgba(173, 255, 53, 0.2);
+}
+
+/* ── Form (Step 3) ── */
+.bca-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.bca-selected-slot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 4px;
+}
+
+.bca-slot-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #adff35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #07130a;
+  flex: 0 0 auto;
+}
+
+.bca-slot-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bca-slot-info strong {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bca-slot-info span {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #adff35;
+}
+
+.bca-change-btn {
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.bca-change-btn:hover {
+  border-color: rgba(173, 255, 53, 0.4);
+  color: #adff35;
+}
+
+.bca-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bca-label > span {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bca-label input {
+  padding: 15px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.bca-label input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.bca-label input:focus {
+  outline: none;
+  border-color: rgba(173, 255, 53, 0.45);
+  background: rgba(173, 255, 53, 0.04);
+}
+
+.bca-confirm-btn {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: 14px;
+  background: #adff35;
+  color: #07130a;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 220ms ease;
+  box-shadow:
+    0 8px 28px rgba(173, 255, 53, 0.35),
+    0 0 0 0 rgba(173, 255, 53, 0);
+}
+
+.bca-confirm-btn:hover {
+  background: #c1ff5c;
+  box-shadow:
+    0 14px 44px rgba(173, 255, 53, 0.55),
+    0 0 0 4px rgba(173, 255, 53, 0.15);
+  transform: translateY(-2px);
+}
+
+.bca-confirm-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Confirmed ── */
+.bca-confirmed {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.bca-confirmed-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(173, 255, 53, 0.15);
+  border: 2px solid rgba(173, 255, 53, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adff35;
+  margin: 0 auto 24px;
+}
+
+.bca-confirmed h3 {
+  margin: 0 0 10px;
+  font-family: 'Changa One', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.bca-confirmed > p {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #adff35;
+}
+
+.bca-confirmed-sub {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.9rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6;
+}
+
+.bca-confirmed-sub strong {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Responsive ── */
+@media (max-width: 780px) {
+  .bca-card {
+    padding: 28px 20px 32px;
+  }
+
+  .bca-days {
+    gap: 6px;
+  }
+
+  .bca-day {
+    padding: 10px 4px;
+  }
+
+  .bca-day-num {
+    font-size: 1.25rem;
+  }
+
+  .bca-times {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .bca-days {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .bca-times {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

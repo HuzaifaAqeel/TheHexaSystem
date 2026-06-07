@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { brands, capabilities, stats, projects, advantages, faqs } from "../data";
 import { useHeroPointer } from "../hooks";
+import BookCallWidget from "../components/BookCallWidget";
 
 export default function Home() {
   useHeroPointer();
@@ -168,6 +169,9 @@ export default function Home() {
         </Link>
       </section>
 
+      {/* ── BOOK A CALL ── */}
+      <BookCallWidget />
+
       {/* ── FAQ ── */}
       <section className="section faq-section">
         <div className="section-heading centered" data-reveal>
@@ -179,23 +183,6 @@ export default function Home() {
           <Link className="button button-green" to="/about">
             More Questions <span className="button-arrow" aria-hidden="true" />
           </Link>
-        </div>
-      </section>
-
-      {/* ── CTA BAND ── */}
-      <section className="section cta-band section-dark">
-        <div className="cta-band-inner" data-reveal>
-          <p className="kicker">Ready to Scale?</p>
-          <h2>Let's Build Your<br />Intelligent System</h2>
-          <p>Book a free 30-minute strategy call. No pressure, no commitment — just a conversation about what's possible.</p>
-          <div className="hero-actions" style={{ justifyContent: "center", marginTop: "32px" }}>
-            <Link className="button button-green" to="/book-call">
-              Book a Free Call <span className="button-arrow" aria-hidden="true" />
-            </Link>
-            <Link className="button button-ghost" to="/contact">
-              Send a Message
-            </Link>
-          </div>
         </div>
       </section>
     </>
