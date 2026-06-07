@@ -88,7 +88,7 @@ export default function Home() {
                 <p className="detail-extra">{cap.detail}</p>
                 <div className="card-btn-wrapper">
                   <Link className="card-contact-btn" to="/services">
-                    Learn More <span className="arrow">→</span>
+                    Make It Happen <span className="arrow">→</span>
                   </Link>
                 </div>
               </div>
