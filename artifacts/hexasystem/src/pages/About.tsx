@@ -62,7 +62,9 @@ export default function About() {
         <div className="team-grid">
           {cms.team.map(m => (
             <div className="team-card" data-reveal key={m.id}>
-              <div className="team-avatar" style={{ background: `${m.color}22`, border: `2px solid ${m.color}44` }}><span style={{ color: m.color }}>{m.initials}</span></div>
+              <div className="team-avatar" style={{ background: `${m.color}22`, border: `2px solid ${m.color}44`, overflow: "hidden" }}>
+                {m.image ? <img src={m.image} alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span style={{ color: m.color }}>{m.initials}</span>}
+              </div>
               <h3>{m.name}</h3>
               <p className="team-role">{m.role}</p>
               <p className="team-bio">{m.bio}</p>

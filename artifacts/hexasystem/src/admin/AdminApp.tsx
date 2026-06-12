@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./admin.css";
 import { useAuth } from "../contexts/AuthContext";
-import { useCms } from "../contexts/CmsContext";
+import { useCms, resizeImage } from "../contexts/CmsContext";
 import type {
   Service, Project, Stat, Faq, Advantage, Brand, TeamMember,
   HeroData, AboutData, ContactInfo, SiteSettings,
@@ -33,6 +33,8 @@ const Icon = {
   trash: <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>,
   external: <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" strokeWidth="2" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>,
   x: <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+  sun: <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
+  moon: <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
 };
 
 type Section = "overview" | "hero" | "services" | "portfolio" | "stats" | "about" | "faq" | "team" | "brands" | "contact" | "settings";
@@ -361,16 +363,26 @@ function SectionPortfolio({ toast }: { toast: (m: string) => void }) {
   const [adding, setAdding] = useState(false);
   const blank = { category: "", title: "", text: "", client: "", result: "" };
   const [form, setForm] = useState(blank);
+  const [image, setImage] = useState<string>("");
+
   const set = (k: keyof typeof blank, v: string) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const resized = await resizeImage(file, 800);
+      setImage(resized);
+    }
+  };
 
   const handleSave = () => {
     if (!form.title.trim()) return;
-    if (editing) { updateProject({ ...editing, ...form }); toast("Project updated!"); }
-    else { addProject(form); toast("Project added!"); }
-    setEditing(null); setAdding(false); setForm(blank);
+    if (editing) { updateProject({ ...editing, ...form, image }); toast("Project updated!"); }
+    else { addProject({ ...form, image }); toast("Project added!"); }
+    setEditing(null); setAdding(false); setForm(blank); setImage("");
   };
 
-  const startEdit = (p: Project) => { setEditing(p); setAdding(false); setForm({ category: p.category, title: p.title, text: p.text, client: p.client, result: p.result }); };
+  const startEdit = (p: Project) => { setEditing(p); setAdding(false); setForm({ category: p.category, title: p.title, text: p.text, client: p.client, result: p.result }); setImage(p.image || ""); };
 
   return (
     <>
@@ -389,6 +401,11 @@ function SectionPortfolio({ toast }: { toast: (m: string) => void }) {
           <label className="ad-label"><span>Project Title</span><input className="ad-input" value={form.title} onChange={e => set("title", e.target.value)} placeholder="Project title" /></label>
           <label className="ad-label"><span>Description</span><textarea className="ad-textarea" value={form.text} onChange={e => set("text", e.target.value)} rows={3} placeholder="Describe the project" /></label>
           <label className="ad-label"><span>Key Result</span><input className="ad-input" value={form.result} onChange={e => set("result", e.target.value)} placeholder="e.g. 70% reduction in support tickets" /></label>
+          <label className="ad-label">
+            <span>Project Image</span>
+            <input type="file" accept="image/*" onChange={handleImageChange} className="ad-input" style={{ padding: "8px 12px" }} />
+            {image && <img src={image} alt="Preview" style={{ marginTop: 8, maxWidth: 200, borderRadius: 8, border: "1px solid rgba(255,255,255,0.1)" }} />}
+          </label>
           <div className="ad-save-row"><button className="ad-btn ad-btn-ghost ad-btn-sm" onClick={() => { setAdding(false); setEditing(null); }}>Cancel</button><button className="ad-btn ad-btn-primary ad-btn-sm" onClick={handleSave}>Save</button></div>
         </div>
       )}
@@ -617,13 +634,22 @@ function SectionTeam({ toast }: { toast: (m: string) => void }) {
   const [adding, setAdding] = useState(false);
   const blank = { name: "", initials: "", role: "", bio: "", color: "#adff35" };
   const [form, setForm] = useState(blank);
+  const [image, setImage] = useState<string>("");
   const set = (k: keyof typeof blank, v: string) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const resized = await resizeImage(file, 400);
+      setImage(resized);
+    }
+  };
 
   const handleSave = () => {
     if (!form.name.trim()) return;
-    if (editing) { updateTeamMember({ ...editing, ...form }); toast("Team member updated!"); }
-    else { addTeamMember(form); toast("Team member added!"); }
-    setEditing(null); setAdding(false); setForm(blank);
+    if (editing) { updateTeamMember({ ...editing, ...form, image }); toast("Team member updated!"); }
+    else { addTeamMember({ ...form, image }); toast("Team member added!"); }
+    setEditing(null); setAdding(false); setForm(blank); setImage("");
   };
 
   return (
@@ -647,7 +673,14 @@ function SectionTeam({ toast }: { toast: (m: string) => void }) {
               </div>
             </label>
           </div>
-          <label className="ad-label"><span>Bio</span><textarea className="ad-textarea" value={form.bio} onChange={e => set("bio", e.target.value)} rows={3} /></label>
+          <div className="ad-form-grid ad-form-grid-2">
+            <label className="ad-label"><span>Bio</span><textarea className="ad-textarea" value={form.bio} onChange={e => set("bio", e.target.value)} rows={3} /></label>
+            <label className="ad-label">
+              <span>Avatar Image</span>
+              <input type="file" accept="image/*" onChange={handleImageChange} className="ad-input" style={{ padding: "8px 12px" }} />
+              {image && <img src={image} alt="Preview" style={{ marginTop: 8, width: 48, height: 48, borderRadius: "50%", objectFit: "cover", border: `2px solid ${form.color}` }} />}
+            </label>
+          </div>
           <div className="ad-save-row"><button className="ad-btn ad-btn-ghost ad-btn-sm" onClick={() => { setAdding(false); setEditing(null); }}>Cancel</button><button className="ad-btn ad-btn-primary ad-btn-sm" onClick={handleSave}>Save</button></div>
         </div>
       )}
@@ -668,7 +701,7 @@ function SectionTeam({ toast }: { toast: (m: string) => void }) {
                   <td style={{ color: "#adff35", fontSize: "0.78rem" }}>{m.role}</td>
                   <td><span className="ad-truncate">{m.bio}</span></td>
                   <td><div className="ad-actions">
-                    <button className="ad-btn ad-btn-ghost ad-btn-sm ad-btn-icon" onClick={() => { setEditing(m); setAdding(false); setForm({ name: m.name, initials: m.initials, role: m.role, bio: m.bio, color: m.color }); }}>{Icon.edit}</button>
+                    <button className="ad-btn ad-btn-ghost ad-btn-sm ad-btn-icon" onClick={() => { setEditing(m); setAdding(false); setForm({ name: m.name, initials: m.initials, role: m.role, bio: m.bio, color: m.color }); setImage(m.image || ""); }}>{Icon.edit}</button>
                     <button className="ad-btn ad-btn-danger ad-btn-sm ad-btn-icon" onClick={() => { deleteTeamMember(m.id); toast("Removed."); }}>{Icon.trash}</button>
                   </div></td>
                 </tr>
@@ -797,6 +830,7 @@ export default function AdminApp() {
   const { user, logout } = useAuth();
   const [section, setSection] = useState<Section>("overview");
   const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   const toast = (msg: string) => setToastMsg(msg);
   const dismissToast = () => setToastMsg(null);
@@ -807,7 +841,7 @@ export default function AdminApp() {
   const [title, subtitle] = SECTION_TITLES[section];
 
   return (
-    <div className="ad-root">
+    <div className={`ad-root ${theme === "light" ? "light-mode" : ""}`}>
       <div className="ad-shell">
         <Sidebar active={section} onSelect={setSection} user={user} onLogout={logout} />
         <div className="ad-main">
@@ -817,6 +851,9 @@ export default function AdminApp() {
               <div className="ad-topbar-sub">{subtitle}</div>
             </div>
             <div className="ad-topbar-right">
+              <button className="ad-btn-icon ad-btn-ghost" onClick={() => setTheme(t => t === "dark" ? "light" : "dark")} title="Toggle Theme" style={{ marginRight: 8 }}>
+                {theme === "dark" ? Icon.sun : Icon.moon}
+              </button>
               <Link to="/" className="ad-view-site-btn" target="_blank">{Icon.external} View Site</Link>
             </div>
           </div>

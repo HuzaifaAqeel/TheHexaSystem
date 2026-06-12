@@ -491,3 +491,111 @@
   .ad-main { margin-left: 200px; }
   .ad-stats-row { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Light Mode Overrides ── */
+.ad-root.light-mode {
+  background: #f4f5f0;
+  color: #070806;
+}
+
+.ad-root.light-mode .ad-auth-card,
+.ad-root.light-mode .ad-card,
+.ad-root.light-mode .ad-quick-card,
+.ad-root.light-mode .ad-stat-card,
+.ad-root.light-mode .ad-modal {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.ad-root.light-mode .ad-sidebar {
+  background: #f8f9f5;
+  border-right-color: rgba(0,0,0,0.06);
+}
+
+.ad-root.light-mode .ad-topbar {
+  background: #f4f5f0;
+  border-bottom-color: rgba(0,0,0,0.06);
+}
+
+.ad-root.light-mode h1,
+.ad-root.light-mode h2,
+.ad-root.light-mode h3,
+.ad-root.light-mode h4,
+.ad-root.light-mode h5,
+.ad-root.light-mode h6,
+.ad-root.light-mode .ad-topbar-title,
+.ad-root.light-mode .ad-auth-title,
+.ad-root.light-mode .ad-section-head h2,
+.ad-root.light-mode .ad-sidebar-logo span,
+.ad-root.light-mode .ad-label span,
+.ad-root.light-mode .ad-card-title,
+.ad-root.light-mode strong {
+  color: #070806;
+}
+
+.ad-root.light-mode .ad-topbar-sub,
+.ad-root.light-mode .ad-section-head p,
+.ad-root.light-mode .ad-nav-item,
+.ad-root.light-mode .ad-user-info span,
+.ad-root.light-mode .ad-quick-card span,
+.ad-root.light-mode .ad-stat-card span {
+  color: #5d7096;
+}
+
+.ad-root.light-mode .ad-input, 
+.ad-root.light-mode .ad-textarea, 
+.ad-root.light-mode .ad-select {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.1);
+  color: #070806;
+}
+
+.ad-root.light-mode .ad-table th {
+  color: #3a4a65;
+  border-bottom-color: rgba(0,0,0,0.06);
+}
+
+.ad-root.light-mode .ad-table td {
+  color: #282a26;
+  border-bottom-color: rgba(0,0,0,0.04);
+}
+
+.ad-root.light-mode .ad-btn-ghost {
+  background: rgba(0,0,0,0.04);
+  color: #070806;
+  border-color: rgba(0,0,0,0.08);
+}
+
+.ad-root.light-mode .ad-btn-ghost:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+.ad-root.light-mode .ad-nav-item:hover {
+  background: rgba(0,0,0,0.04);
+  color: #070806;
+}
+
+.ad-root.light-mode .ad-nav-item.active {
+  background: rgba(173,255,53,0.3);
+  color: #119936;
+}
+
+.ad-root.light-mode .ad-nav-item.active svg {
+  stroke: #119936;
+}
+
+.ad-root.light-mode .ad-user-row {
+  background: rgba(0,0,0,0.04);
+}
+
+.ad-root.light-mode .ad-inline-editor {
+  background: rgba(173,255,53,0.1);
+  border-color: rgba(173,255,53,0.3);
+}
+
+.ad-root.light-mode .ad-toast {
+  background: #ffffff;
+  color: #119936;
+  border-color: rgba(173,255,53,0.6);
+}

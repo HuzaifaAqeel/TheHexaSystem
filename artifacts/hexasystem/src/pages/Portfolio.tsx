@@ -38,7 +38,11 @@ export default function Portfolio() {
         <div className="project-grid">
           {filtered.map(p => (
             <article className="project-card" data-reveal key={p.id}>
-              <div className="project-screen" aria-hidden="true"><span /><span /><span /><div /></div>
+              {p.image ? (
+                <div style={{ width: "100%", height: 160, background: `url(${p.image}) center/cover`, borderRadius: 6, marginBottom: 16 }} />
+              ) : (
+                <div className="project-screen" aria-hidden="true"><span /><span /><span /><div /></div>
+              )}
               <p className="project-category">{p.category}</p>
               <h3>{p.title}</h3>
               <p>{p.text}</p>

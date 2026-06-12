@@ -23,6 +23,7 @@ export interface Project {
   text: string;
   client: string;
   result: string;
+  image?: string;
 }
 
 export interface Stat {
@@ -55,6 +56,7 @@ export interface TeamMember {
   role: string;
   bio: string;
   color: string;
+  image?: string;
 }
 
 export interface HeroData {
@@ -128,6 +130,36 @@ interface CmsContextValue {
   updateAbout: (a: AboutData) => void;
   updateContactInfo: (c: ContactInfo) => void;
   updateSettings: (s: SiteSettings) => void;
+}
+
+/* ─── Image Resize Helper ─── */
+export async function resizeImage(file: File, maxWidth = 800): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return resolve(e.target?.result as string);
+        
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
+      };
+      img.onerror = () => resolve(e.target?.result as string);
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 /* ─── Default data ─── */
