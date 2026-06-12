@@ -1,6 +1,6 @@
 import { Router, type Request, type Response } from "express";
 // @ts-ignore - Vercel tsc struggles to resolve monorepo packages without tsc -b
-import { HealthCheckResponse } from "@workspace/api-zod";
+const { HealthCheckResponse } = require("@workspace/api-zod");
 
 const router = Router();
 
