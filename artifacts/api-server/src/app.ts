@@ -7,7 +7,8 @@ import { logger } from "./lib/logger";
 const app: Express = express();
 
 app.use(
-  (pinoHttp as any)({
+  // @ts-ignore - Vercel TS compiler quirk with pino-http exports
+  pinoHttp({
     logger,
     serializers: {
       req(req: any) {
