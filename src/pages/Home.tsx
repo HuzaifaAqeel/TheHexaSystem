@@ -4,6 +4,65 @@ import { useCms } from "../contexts/CmsContext";
 import { useHeroPointer } from "../hooks";
 import BookCallWidget from "../components/BookCallWidget";
 
+const leaks = [
+  {
+    title: "Missed Calls",
+    text: "Your team is on a job. The phone rings. Nobody picks up. That caller dials your competitor.",
+  },
+  {
+    title: "Slow Follow-Up",
+    text: "A quote with no follow-up is a quote lost. Every hour of delay kills the deal.",
+  },
+  {
+    title: "No-Shows",
+    text: "Appointments with no reminders become empty slots in your day.",
+  },
+  {
+    title: "Dead Old Leads",
+    text: "Hundreds of past quotes sit untouched. Revenue you already paid for.",
+  },
+];
+
+const recoveryRows = [
+  { name: "Recover 30%", price: "+$7,500 / mo", result: "+15% revenue" },
+  { name: "Recover 40%", price: "+$10,000 / mo", result: "+20% revenue" },
+  { name: "Recover 50%", price: "+$12,500 / mo", result: "+25% revenue" },
+];
+
+const howItWorks = [
+  {
+    num: "01",
+    title: "Step 1: Performance Marketing",
+    desc: "Meta ads built to bring a steady flow of leads to your business.",
+  },
+  {
+    num: "02",
+    title: "Step 2: AI Automation",
+    desc: "AI voice agent and follow-up. Every lead answered in seconds, day and night.",
+  },
+  {
+    num: "=",
+    title: "Booked Jobs",
+    desc: "Step 1 brings the leads. Step 2 makes sure not one of them slips away.",
+  },
+];
+
+const offerIncludes = [
+  "Ads built and launched",
+  "Landing page",
+  "AI voice agent",
+  "AI follow-up funnel",
+  "GoHighLevel setup",
+  "Tracking and reporting",
+];
+
+const offerTimeline = [
+  { num: "01", title: "Days 1 to 5: Audit", desc: "We find the truth about your current ads and pipeline before we spend a dollar." },
+  { num: "02", title: "Days 6 to 12: Ads Live", desc: "Campaigns and landing page go live and start bringing in leads." },
+  { num: "03", title: "Days 13 to 20: AI Live", desc: "Voice agent and follow-up funnel go live. Every lead answered in seconds." },
+  { num: "04", title: "Day 25: Handover", desc: "The full system is yours, running and tracked." },
+];
+
 export default function Home() {
   useHeroPointer();
   const { cms } = useCms();
@@ -54,18 +113,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="section stats-section">
-        <div className="section-heading centered" data-reveal>
-          <p className="kicker">Our Impact</p>
-          <h2>Numbers That Speak</h2>
+      {/* ── PROBLEM ── */}
+      <section className="section arsenal">
+        <div className="section-heading" data-reveal>
+          <p className="kicker">The Problem</p>
+          <h2>Your Leads Are Leaking. Here Is Where.</h2>
+          <p className="section-sub">You do not need more leads. You need to stop losing the ones you have.</p>
         </div>
-        <div className="stat-grid">
-          {stats.map((s) => (
-            <div className="stat-card" data-reveal key={s.id}>
-              <strong data-count={s.value}>0</strong>
-              <span>{s.label}</span>
+        <div className="capability-list">
+          {leaks.map((leak, index) => (
+            <article className="capability-card" data-reveal key={leak.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{leak.title}</h3>
+              <div className="card-detail">
+                <p>{leak.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── THE MATH ── */}
+      <section className="section pricing-section">
+        <div className="section-heading centered" data-reveal>
+          <p className="kicker">The Math</p>
+          <h2>What Missed Leads Cost You</h2>
+          <p className="section-sub">50 missed leads a month x $500 average ticket = $25,000 a month walking out the door. Now watch what happens when the system recovers them.</p>
+        </div>
+        <div className="pricing-grid">
+          {recoveryRows.map((row) => (
+            <div className="pricing-card" data-reveal key={row.name}>
+              <div className="pricing-header"><h3>{row.name}</h3><div className="pricing-price"><strong>{row.price}</strong></div><p>{row.result}</p></div>
+              <Link className="button button-dark" to="/book-call">Recover My Leads <span className="button-arrow" aria-hidden="true" /></Link>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section className="section process-section">
+        <div className="section-heading centered" data-reveal><p className="kicker">How It Works</p><h2>Two Steps. One System. More Revenue.</h2></div>
+        <div className="process-grid">
+          {howItWorks.map(s => (
+            <div className="process-step" data-reveal key={s.num}><div className="process-num">{s.num}</div><h3>{s.title}</h3><p>{s.desc}</p></div>
           ))}
         </div>
       </section>
@@ -75,7 +165,7 @@ export default function Home() {
         <div className="section-heading" data-reveal>
           <p className="kicker">Services</p>
           <h2>What We Build</h2>
-          <p className="section-sub">From AI chatbots to full automation pipelines — we handle every layer of your intelligent system.</p>
+          <p className="section-sub">Performance marketing brings the leads. AI automation answers every one of them.</p>
         </div>
         <div className="capability-list">
           {services.map((cap, index) => (
@@ -101,6 +191,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── OFFER ── */}
+      <section className="section pricing-section">
+        <div className="section-heading centered" data-reveal>
+          <p className="kicker">The Offer</p>
+          <h2>$3,500 Setup. Everything Included.</h2>
+          <p className="section-sub">We take on a limited number of builds each month.</p>
+        </div>
+        <div className="pricing-grid">
+          <div className="pricing-card pricing-highlight" data-reveal>
+            <div className="pricing-badge">Complete Build</div>
+            <div className="pricing-header"><h3>Booked Jobs System</h3><div className="pricing-price"><strong>$3,500</strong><span>one-time setup</span></div><p>Ads plus AI, built for you and live in 25 days.</p></div>
+            <ul className="pricing-features">{offerIncludes.map(f => <li key={f}><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2.5" fill="none"><polyline points="20 6 9 17 4 12" /></svg>{f}</li>)}</ul>
+            <Link className="button button-green" to="/book-call">Book a Free Strategy Call <span className="button-arrow" aria-hidden="true" /></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── OFFER TIMELINE ── */}
+      <section className="section process-section">
+        <div className="section-heading centered" data-reveal><p className="kicker">Timeline</p><h2>Live In 25 Days</h2></div>
+        <div className="process-grid">
+          {offerTimeline.map(s => (
+            <div className="process-step" data-reveal key={s.num}><div className="process-num">{s.num}</div><h3>{s.title}</h3><p>{s.desc}</p></div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── STATS ── */}
+      <section className="section stats-section">
+        <div className="section-heading centered" data-reveal>
+          <p className="kicker">Our Impact</p>
+          <h2>Numbers That Speak</h2>
+        </div>
+        <div className="stat-grid">
+          {stats.map((s) => (
+            <div className="stat-card" data-reveal key={s.id}>
+              <strong data-count={s.value}>0</strong>
+              <span>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── ABOUT ── */}
       <section className="section about-section">
         <div className="about-title" data-reveal>
@@ -123,7 +256,7 @@ export default function Home() {
           <p className="kicker">Why Choose</p>
           <h2>The System?</h2>
           <span>Unfair Advantage</span>
-          <p>We don't just implement tools; we create clearer workflows, faster response times, and scalable operations your team can trust.</p>
+          <p>Ads bring the leads. AI answers every one of them. One connected system, so no lead slips away.</p>
         </div>
         <div className="advantage-grid">
           {advantages.map((item) => (
