@@ -48,7 +48,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             <Link className={activePath === "/contact" ? "active" : ""} to="/contact" onClick={closeMenu}>Contact</Link>
           </div>
           <Link className="signin" to="/book-call" onClick={closeMenu}>
-            Book Strategy Call <span className="nav-arrow" aria-hidden="true" />
+            Book a Free Strategy Call <span className="nav-arrow" aria-hidden="true" />
           </Link>
         </nav>
       </header>
