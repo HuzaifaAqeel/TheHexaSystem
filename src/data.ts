@@ -11,47 +11,54 @@ export const brands: [string, string][] = [
 
 export const capabilities = [
   {
-    title: "AI Chatbots & Virtual Assistants",
-    text: "Intelligent agents that handle customer support 24/7.",
-    detail: "Deploy conversational AI that resolves 80% of queries instantly, scales infinitely, and learns from every interaction.",
+    title: "Performance Marketing",
+    text: "Meta ads built to bring a steady flow of leads.",
+    detail:
+      "Targeted campaigns for service businesses. A steady flow of leads, tracked every week, so you see what every dollar did.",
   },
   {
-    title: "Business Automation & Workflows",
-    text: "Streamline operations and eliminate manual tasks.",
-    detail: "End-to-end process automation with intelligent triggers, conditional logic, and real-time reporting dashboards.",
+    title: "AI Voice Agent",
+    text: "Answers every call, 24/7, and books the job.",
+    detail:
+      "A natural-sounding voice agent that answers every inbound call, qualifies the caller, and books appointments around the clock, even while your team is out on a job.",
   },
   {
-    title: "AI Voice Agents",
-    text: "Human-like voice callers for inbound and outbound.",
-    detail: "Natural-sounding voice AI that handles calls, books appointments, and qualifies leads around the clock.",
+    title: "AI Follow-Up Funnel",
+    text: "Every lead followed up in under 60 seconds.",
+    detail:
+      "Instant follow-up on every quote and inquiry, reminders that cut no-shows, and reactivation that brings dead old leads back to life.",
   },
   {
-    title: "Custom AI Solutions on Your Data",
-    text: "Proprietary models trained on your specific knowledge base.",
-    detail: "Fine-tuned models built on your proprietary data for maximum accuracy and competitive advantage.",
+    title: "Landing Pages",
+    text: "Pages built to turn ad clicks into booked calls.",
+    detail:
+      "Fast, focused landing pages with one job: convert the click into a booked job.",
   },
   {
-    title: "Lead Generation Automation",
-    text: "Find, qualify, and nurture leads on autopilot.",
-    detail: "AI-powered prospecting that identifies, scores, and engages high-value leads automatically.",
+    title: "GoHighLevel Setup",
+    text: "Every lead tracked. Nothing lost.",
+    detail:
+      "Your full pipeline set up in GoHighLevel: calls, messages, follow-ups, and bookings in one place.",
   },
   {
-    title: "Social Media AI Automation",
-    text: "Content creation and engagement scaled by AI.",
-    detail: "Automated content scheduling, engagement tracking, and AI-generated posts tailored to your brand voice.",
+    title: "Tracking & Reporting",
+    text: "See what every dollar did, every week.",
+    detail:
+      "Weekly reporting on leads, bookings, and revenue, so the system is transparent from day one.",
   },
   {
-    title: "Web Development & Design",
-    text: "High-performance, conversion-optimized digital experiences.",
-    detail: "Pixel-perfect responsive websites with blazing performance, SEO optimization, and conversion-focused UX.",
+    title: "Ad Audit",
+    text: "Already running ads? We start with the truth.",
+    detail:
+      "Before you spend one more dollar, we audit where your leads land, whether they are qualified, and what happens after the click.",
   },
 ];
 
 export const stats: [string, string][] = [
-  ["200+", "Projects Deployed"],
-  ["50+", "Enterprise Clients"],
-  ["7+", "AI Pipelines"],
-  ["3+", "Years Dominating"],
+  ["60 sec", "To follow up on every lead"],
+  ["24/7", "AI answers every call"],
+  ["25 days", "From kickoff to handover"],
+  ["$25,000", "Lost monthly on 50 missed leads at a $500 ticket"],
 ];
 
 export const projects = [
@@ -79,12 +86,12 @@ export const projects = [
 ];
 
 export const advantages = [
-  "100% Automated Workflows",
-  "Proprietary AI Models",
-  "24/7 System Reliability",
-  "Seamless API Integration",
-  "Real-Time Data Processing",
-  "Enterprise-Grade Security",
+  "Every lead answered in seconds",
+  "Follow-up in under 60 seconds",
+  "Old leads reactivated on autopilot",
+  "Every lead tracked, nothing lost",
+  "Live in 25 days",
+  "One system: ads plus AI working together",
 ];
 
 export const days: [string, string][] = [
@@ -99,23 +106,28 @@ export const days: [string, string][] = [
 
 export const faqs = [
   {
-    question: "How fast can TheHexaSystem launch an automation project?",
+    question: "What exactly does Hexa Systems build?",
     answer:
-      "Most focused systems move from strategy to prototype in 2-4 weeks, depending on data access, integrations, and approval paths.",
+      "One system in two steps: performance marketing that brings a steady flow of leads, and AI automation that answers every lead in seconds, follows up, and books the job. Ads bring the leads. AI answers every one of them.",
   },
   {
-    question: "Can you build on top of our existing tools?",
+    question: "I already run ads. Do I still need this?",
     answer:
-      "Yes. We connect to CRMs, inboxes, calendars, lead tools, websites, databases, and internal platforms through APIs and secure workflow layers.",
+      "Yes. We start with an audit. We check where your leads land, whether they are qualified, and what happens after the click. Then we plug in the AI system so every dollar you already spend starts converting.",
   },
   {
-    question: "Do you handle custom AI trained on our knowledge base?",
+    question: "How fast does it go live?",
     answer:
-      "Yes. We build private knowledge systems, retrieval pipelines, and tailored assistants around your documents, processes, and customer data.",
+      "25 days. Days 1 to 5: audit. Days 6 to 12: ads live. Days 13 to 20: AI live. Day 25: handover.",
+  },
+  {
+    question: "What is included in the setup?",
+    answer:
+      "Ads built and launched, landing page, AI voice agent, AI follow-up funnel, GoHighLevel setup, and tracking and reporting. One price: $3,500 setup.",
   },
   {
     question: "What happens after launch?",
     answer:
-      "We monitor performance, improve prompts and workflows, add safeguards, and help your team operate the system confidently.",
+      "You get tracking and reporting on every lead and booking, and the system keeps answering, following up, and reactivating old leads on autopilot.",
   },
 ];
