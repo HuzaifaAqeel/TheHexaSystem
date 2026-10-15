@@ -75,11 +75,11 @@ function Layout({ children }: { children: React.ReactNode }) {
           <div className="footer-links">
             <div>
               <h3 className="calligraphic-heading">Services</h3>
-              <Link to="/services">AI CHATBOTS</Link>
-              <Link to="/services">VOICE AGENTS</Link>
-              <Link to="/services">AUTOMATION</Link>
-              <Link to="/services">LEAD GENERATION</Link>
-              <Link to="/services">WEB DEVELOPMENT</Link>
+              <Link to="/services">PERFORMANCE MARKETING</Link>
+              <Link to="/services">AI VOICE AGENTS</Link>
+              <Link to="/services">FOLLOW-UP FUNNELS</Link>
+              <Link to="/services">LANDING PAGES</Link>
+              <Link to="/services">GOHIGHLEVEL SETUP</Link>
             </div>
             <div>
               <h3 className="calligraphic-heading">Company</h3>
