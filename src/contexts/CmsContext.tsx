@@ -167,13 +167,13 @@ const uid = () => Math.random().toString(36).slice(2);
 
 const DEFAULT: CmsData = {
   hero: {
-    line1: "We Build",
-    line2: "Intelligent Systems",
-    cursive: "That",
-    line3: "Dominate",
-    body: "Automation engines that eliminate repetitive work, multiply revenue 10x, and give your team back the time they deserve.",
-    cta1: "Book a free call",
-    cta2: "Explore Services",
+    line1: "We Turn",
+    line2: "Ad Spend Into",
+    cursive: "Booked",
+    line3: "Jobs.",
+    body: "Ads bring the leads. AI answers every one of them. One system that stops leads leaking and turns them into booked jobs, live in 25 days.",
+    cta1: "Book a Free Strategy Call",
+    cta2: "See How It Works",
   },
   services: defaultServices.map((s) => ({ ...s, id: uid() })),
   projects: defaultProjects.map((p) => ({ ...p, id: uid() })),
@@ -189,8 +189,8 @@ const DEFAULT: CmsData = {
   ],
   about: {
     greeting: "Hello!",
-    text1: "We operate at the intersection of design, data, and deep learning. We don't just build software; we architect intelligent systems that multiply human capability and accelerate business growth.",
-    text2: "In a world cluttered with noise, we deliver pure signal.",
+    text1: "Hexa Systems builds one system for service businesses: performance marketing that brings a steady flow of leads, plus AI automation that answers every lead in seconds, follows up, and books the job.",
+    text2: "You do not need more leads. You need to stop losing the ones you have.",
   },
   contactInfo: {
     email: "hello@thehexasystem.com",
