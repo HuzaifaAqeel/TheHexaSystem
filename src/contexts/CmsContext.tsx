@@ -170,7 +170,7 @@ const DEFAULT: CmsData = {
     line1: "We Turn",
     line2: "Ad Spend Into",
     cursive: "Booked",
-    line3: "Jobs.",
+    line3: "Appointments.",
     body: "Ads bring the leads. AI answers every one of them. One system that stops leads leaking and turns them into booked jobs, live in 25 days.",
     cta1: "Book a Free Strategy Call",
     cta2: "See How It Works",
