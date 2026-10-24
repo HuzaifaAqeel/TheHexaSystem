@@ -161,7 +161,6 @@ a {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--white);
-  background: rgba(255, 255, 255, 0.16);
   transform: translateY(-1px);
 }
 
@@ -2134,7 +2133,6 @@ a {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--white);
-  background: rgba(255, 255, 255, 0.16);
   transform: translateY(-1px);
 }
 
