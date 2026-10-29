@@ -8,6 +8,7 @@ export const Route = createFileRoute("/about")({
       { title: "About | Hexa Systems" },
       { name: "description", content: "Discover how Hexa Systems connects performance marketing and AI automation for service businesses." },
       { property: "og:title", content: "About | Hexa Systems" },
+      { property: "og:url", content: "https://thehexasystems.com/about" },
       { property: "og:description", content: "Discover how Hexa Systems connects performance marketing and AI automation for service businesses." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

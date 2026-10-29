@@ -26,8 +26,11 @@ export const contactConfig = {
 };
 
 export function pageMeta(title: string, description: string, canonical?: string) {
+  const fullTitle = title.endsWith('Hexa Systems') ? title : `${title} | Hexa Systems`;
+  const meta: Record<string, string>[] = [{ title: fullTitle }, { name: 'description', content: description }, { property: 'og:title', content: fullTitle }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }];
+  if (canonical) meta.push({ property: 'og:url', content: canonical });
   return {
-    meta: [{ title: `${title} | Hexa Systems` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} | Hexa Systems` }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }],
+    meta,
     links: canonical ? [{ rel: 'canonical', href: canonical }] : [],
   };
 }
