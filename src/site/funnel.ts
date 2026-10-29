@@ -12,7 +12,7 @@ export type Funnel = {
 export const funnels: Record<string, Funnel> = {
   'performance-marketing': {
     h1: 'Spending on ads but not sure what’s working?',
-    lead: 'Clicks are easy to buy. Customers aren’t. We build campaigns around the leads that actually turn into revenue.',
+    lead: 'Clicks are easy to buy. Customers aren’t. Our performance marketing for service businesses builds campaigns around the leads that actually turn into revenue.',
     pains: [
       { title: 'Budget disappears', text: 'Money goes out every month, but you can’t point to the jobs it brought in.' },
       { title: 'Leads feel random', text: 'Some weeks are busy, others are silent, and nobody knows why.' },
@@ -31,7 +31,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'ai-voice-agents': {
     h1: 'Every missed call is a customer calling your competitor.',
-    lead: 'An AI voice agent answers instantly, day or night, captures the details and books the appointment.',
+    lead: 'An AI voice agent — an AI receptionist for service businesses — answers instantly, day or night, captures the details and books the appointment.',
     pains: [
       { title: 'Calls go to voicemail', text: 'You’re on a job, in a meeting or closed. The caller doesn’t wait.' },
       { title: 'Staff are stretched', text: 'Your team repeats the same answers instead of doing real work.' },
@@ -50,7 +50,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'chatbot-development': {
     h1: 'Visitors have questions. Most leave without asking.',
-    lead: 'A custom AI chatbot answers on the spot, qualifies the visitor and guides them to book or buy.',
+    lead: 'A custom AI chatbot for your website answers on the spot, qualifies the visitor and guides them to book or buy.',
     pains: [
       { title: 'Silent bounces', text: 'People land on your site, can’t find an answer quickly and leave.' },
       { title: 'Same questions daily', text: 'Your inbox fills with questions your website already answers.' },
@@ -69,7 +69,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'web-design': {
     h1: 'Your website should win trust in seconds.',
-    lead: 'If visitors can’t quickly see why you’re the right choice, they move on. We design sites that make the decision easy.',
+    lead: 'If visitors can’t quickly see why you’re the right choice, they move on. Our conversion-focused web design for service businesses makes the decision easy.',
     pains: [
       { title: 'Looks outdated', text: 'Your site doesn’t reflect the quality of your work.' },
       { title: 'Message is unclear', text: 'Visitors can’t tell what you do or why you’re different.' },
@@ -88,7 +88,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'social-media-management': {
     h1: 'Posting when you remember isn’t a strategy.',
-    lead: 'Consistent, on-brand content builds the trust that makes people choose you when they’re ready to buy.',
+    lead: 'Consistent, on-brand social media management for trades and service businesses builds the trust that makes people choose you when they’re ready to buy.',
     pains: [
       { title: 'Inconsistent posting', text: 'Weeks go by with nothing new, and your profile looks inactive.' },
       { title: 'No time to create', text: 'Running the business always comes before making content.' },
@@ -107,7 +107,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'gohighlevel': {
     h1: 'Leads in five places and follow-up on sticky notes?',
-    lead: 'GoHighLevel puts contacts, conversations and your pipeline in one place. We set it up so it actually works for you.',
+    lead: 'GoHighLevel puts contacts, conversations and your pipeline in one place. Our GoHighLevel CRM setup for small businesses and home services sets it up so it actually works for you.',
     pains: [
       { title: 'Scattered leads', text: 'Forms, calls, texts and DMs live in different tools.' },
       { title: 'Manual follow-up', text: 'Reminders depend on someone remembering.' },
@@ -126,7 +126,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'ad-audit': {
     h1: 'Your ads might be leaking money. Let’s find out where.',
-    lead: 'A clear, honest review of your accounts, with a prioritised plan of what to fix first.',
+    lead: 'A paid ad audit — a clear, honest review of your accounts — with a prioritised plan of what to fix first.',
     pains: [
       { title: 'Costs keep rising', text: 'You’re paying more for leads without knowing why.' },
       { title: 'Unclear performance', text: 'You don’t know whether your current setup is good or bad.' },
@@ -145,7 +145,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'ai-follow-up-funnels': {
     h1: 'Most leads aren’t lost. They’re just never followed up.',
-    lead: 'AI follow-up keeps every lead warm with timely, personal messages until they’re ready to book.',
+    lead: 'An AI follow-up funnel keeps every lead warm with timely, personal messages until they’re ready to book.',
     pains: [
       { title: 'One message, then silence', text: 'A lead gets a single reply and then nothing.' },
       { title: 'Quotes go cold', text: 'Estimates are sent, but nobody checks back.' },
@@ -164,7 +164,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'aeo-geo-optimization': {
     h1: 'Customers now ask AI. Does it mention you?',
-    lead: 'People ask ChatGPT, Google AI and others for recommendations. We help AI understand and trust your business.',
+    lead: 'People ask ChatGPT, Google AI and others for recommendations. Our AEO and GEO optimization for service businesses helps AI understand and trust your business.',
     pains: [
       { title: 'Invisible in AI answers', text: 'Competitors get mentioned and you don’t.' },
       { title: 'Unclear online info', text: 'Your services and details are inconsistent across the web.' },
@@ -183,7 +183,7 @@ export const funnels: Record<string, Funnel> = {
   },
   'web-development': {
     h1: 'A slow, fragile website costs you customers.',
-    lead: 'We build fast, reliable websites and integrations that are easy to maintain and grow with you.',
+    lead: 'We build fast, reliable custom web development and integrations that are easy to maintain and grow with you.',
     pains: [
       { title: 'Slow and clunky', text: 'Pages load slowly and visitors give up.' },
       { title: 'Afraid to change anything', text: 'Small updates break things or need a developer.' },
