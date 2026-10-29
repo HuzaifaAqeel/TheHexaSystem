@@ -6,7 +6,7 @@ import { pageMeta } from "@/site/content";
 import { posts } from "@/site/blog";
 
 export const Route = createFileRoute("/blog")({
-  head: () => pageMeta("Blog", "Insights from Hexa Systems on performance marketing, AI voice agents, follow-up funnels and lead conversion."),
+  head: () => pageMeta("Blog", "Insights from Hexa Systems on performance marketing, AI voice agents, follow-up funnels and lead conversion.", "https://thehexasystems.com/blog"),
   component: BlogPage,
 });
 

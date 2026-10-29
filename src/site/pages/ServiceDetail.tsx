@@ -3,6 +3,7 @@ import { ArrowUpRight, Check } from 'lucide-react';
 import { services } from '../content';
 import { funnels } from '../funnel';
 import { CTA, PageHero, Eyebrow, FAQ } from '../components/Design';
+import { JsonLd, serviceJsonLd, faqJsonLd } from '../schema';
 
 // Funnel layout: problem → solution → outcomes → action.
 export default function ServiceDetail({ slug }: { slug: string }) {
@@ -10,7 +11,10 @@ export default function ServiceDetail({ slug }: { slug: string }) {
   const f = funnels[slug];
   if (!service || !f) return null;
   const related = service.related.map(r => services.find(s => s.slug === r)).filter((s): s is (typeof services)[number] => Boolean(s)).slice(0, 3);
+  const visibleFaqs = service.faqs.slice(0, 4);
   return <>
+    <JsonLd data={serviceJsonLd(service)} />
+    <JsonLd data={faqJsonLd(visibleFaqs)} />
     <PageHero label={service.title.toUpperCase()} title={f.h1} text={f.lead}>
       <div className="hx-actions"><CTA>{f.cta}</CTA><CTA secondary to="/services">All Services</CTA></div>
     </PageHero>
@@ -36,7 +40,7 @@ export default function ServiceDetail({ slug }: { slug: string }) {
       </div>
     </section>
 
-    <FAQ items={service.faqs.slice(0, 4)} />
+    <FAQ items={visibleFaqs} />
 
     <section className="hx-final"><div className="hx-container" data-reveal>
       <Eyebrow>LET’S DO THIS</Eyebrow>

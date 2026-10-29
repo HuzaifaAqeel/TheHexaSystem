@@ -25,6 +25,9 @@ export const contactConfig = {
   bookingUrl: '', // Set only to an authorized, working scheduler URL.
 };
 
-export function pageMeta(title: string, description: string) {
-  return { meta: [{ title: `${title} | Hexa Systems` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} | Hexa Systems` }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] };
+export function pageMeta(title: string, description: string, canonical?: string) {
+  return {
+    meta: [{ title: `${title} | Hexa Systems` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} | Hexa Systems` }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }],
+    links: canonical ? [{ rel: 'canonical', href: canonical }] : [],
+  };
 }

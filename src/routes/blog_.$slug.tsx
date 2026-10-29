@@ -4,6 +4,7 @@ import Layout from "@/site/Layout";
 import { CTA, Eyebrow } from "@/site/components/Design";
 import { pageMeta, services } from "@/site/content";
 import { posts, type PostBlock } from "@/site/blog";
+import { JsonLd, articleJsonLd } from "@/site/schema";
 
 export const Route = createFileRoute("/blog_/$slug")({
   loader: ({ params }) => {
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/blog_/$slug")({
     if (!post) throw notFound();
     return { slug: post.slug, title: post.title, excerpt: post.excerpt };
   },
-  head: ({ loaderData }) => pageMeta(loaderData?.title ?? "Article", loaderData?.excerpt ?? "Insights from Hexa Systems."),
+  head: ({ loaderData }) => pageMeta(loaderData?.title ?? "Article", loaderData?.excerpt ?? "Insights from Hexa Systems.", loaderData?.slug ? `https://thehexasystems.com/blog/${loaderData.slug}` : undefined),
   component: PostPage,
 });
 
@@ -32,6 +33,7 @@ function PostPage() {
   const more = posts.filter((p) => p.slug !== slug).slice(0, 3);
   return (
     <Layout>
+      <JsonLd data={articleJsonLd(post)} />
       <article className="hx-post">
         <header className="hx-container hx-post-head" data-reveal>
           <Link to="/blog" className="hx-text-link"><ArrowLeft size={16} /> All articles</Link>
@@ -39,7 +41,7 @@ function PostPage() {
           <h1>{post.title}</h1>
           <p className="hx-lead">{post.excerpt}</p>
         </header>
-        <div className="hx-container"><img className="hx-post-cover" src={post.image} alt="" /></div>
+        <div className="hx-container"><img className="hx-post-cover" src={post.image} alt={post.title} /></div>
         <div className="hx-container hx-post-layout">
           <aside className="hx-glass hx-post-takeaways">
             <strong>Key takeaways</strong>
