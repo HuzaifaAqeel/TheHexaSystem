@@ -55,6 +55,7 @@ function PostPage() {
         <h2>Want this set up for your business?</h2>
         <p>We can implement it for you, end to end.</p>
         <CTA>Let’s Talk Growth</CTA>
+        {service ? <p><Link className="hx-text-link" to="/services/$slug" params={{ slug: service.slug }}>See our {service.title} service <ArrowUpRight size={16} /></Link></p> : null}
         <div className="hx-svc-related">{more.map((p) => <Link key={p.slug} className="hx-text-link" to="/blog/$slug" params={{ slug: p.slug }}>{p.title} <ArrowUpRight size={16} /></Link>)}</div>
       </div></section>
     </Layout>
