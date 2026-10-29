@@ -1,0 +1,38 @@
+# Website redesign
+- [x] Reduce the smallest mobile text from 17px to 15px without changing desktop typography.
+- [x] Refine contact focus borders and themed dropdown, and center the footer HEXA SYSTEMS text.
+- [x] Refine the mobile menu button border and light-green hover/active states.
+- [x] Remove header logo hover lift and slightly increase header height across screen sizes.
+- [x] Keep only the logo beside the footer introduction, retaining the large centered wordmark below.
+- [x] Send growth and strategy-call buttons to Contact and display the inquiry form alongside the calendar; verify both request flows.
+- [ ] Deliver inquiries and strategy-call requests to info@thehexasystems.com. Blocked: sender domain setup and verification are required before connecting managed email sending.
+- [x] Remove the final "Your Next Chapter" CTA section from the homepage and move "Or send us a message" beneath the booking panel.
+- [x] Move the FAQ section to the very end of the homepage, above the footer.
+- [x] Enlarge opportunity labels, add synchronized adjustment sliders, and restyle results with light-green glass and shiny borders.
+- [x] Give workflow boxes shiny liquid-glass styling and advance the lime highlight every two seconds.
+- [x] Add coordinated premium entrances and interaction motion across public pages; verify reduced motion and navigation.
+- [x] Restyle shared FAQs with polished theme-matched accordion items and remove the homepage benefit strip below the hero.
+- [x] Place the uploaded logo in header/footer and refine rounded navigation, top gap, larger text, and dot-free active links.
+- [x] Remove the dotted ring around the "Explore Our Services" button.
+- [x] Match the hero "Book a Strategy Call" button to the shared lime pill used elsewhere.
+- [x] Increase the gap above the navbar and show only the logo mark in the header (footer keeps the wordmark).
+- [x] Remove the visible pause buttons beside website animations.
+- [x] Audit genuine business content and destinations; keep unverifiable client/team claims unpublished.
+- [x] Rebuild shared typography, navigation, buttons, glass styling, and cinematic footer.
+- [x] Rebuild homepage with animated hero, curved services, connected workflow, calculator, process, and FAQs.
+- [x] Redesign all existing public pages and add service detail / process pages.
+- [x] Verify calculations, navigation, email drafts, desktop/tablet/mobile layout, reduced motion, pause controls, and page metadata.
+- [ ] Connect live scheduling. Blocked: no authorized scheduler supplied; calendar selections request a preferred time, not a confirmed appointment.
+- [x] Add "Book a Free Strategy Call" section to homepage end: full-month calendar with month navigation, time-slot picker, details step preparing an email draft (no fake booking)
+- [x] Apply the booking section's lime pill button style to every button across the site; verify on desktop and mobile.
+- [x] Switch body text to "Google Sans"/Outfit (headings keep Clash Display) and enforce a 14px minimum text size site-wide.
+- [x] Remove the "Clarity, Not Guesswork" dashboard section and its illustration from the home page.
+- [x] Widen the gap above the hero badge and give the badge a transparent glassy glowing treatment.
+- [x] Replace the calligraphic (Caveat) accent text with Outfit and shrink the booking calendar date boxes.
+- [x] Tighten the navbar-to-hero gap; make the hero badge light-green glass with a slow continuous shine sweep that keeps text readable.
+
+- [x] Blog: 4 sample posts with styled list and article pages
+- [x] Service pages: short problem-first funnel copy
+- [x] Header menu centered + services dropdown
+- [x] Process section pinned, cards stack per scroll step
+- [x] Faster page changes + smooth section entrance animation
