@@ -7,9 +7,8 @@ import { CTA, serviceIcons } from './components/Design';
 import { contactConfig, serviceGroups, services } from './content';
 import meadow from '@/assets/meadow.mp4.asset.json';
 import poster from '@/assets/meadow-poster.jpg';
-import brandLogo from '@/assets/hexa-brand.png.asset.json';
 
-export function Brand({ name = true }: { name?: boolean }) { return <Link to="/" className={`hx-brand ${name ? '' : 'hx-brand--mark'}`} aria-label="Hexa Systems home"><img className="hx-brand-symbol" src={brandLogo.url} alt="" width="273" height="325" />{name ? <span className="hx-brand-name">HEXA<small>SYSTEMS</small></span> : null}</Link>; }
+export function Brand({ name = true }: { name?: boolean }) { return <Link to="/" className={`hx-brand ${name ? '' : 'hx-brand--mark'}`} aria-label="Hexa Systems home"><img className="hx-brand-symbol" src="/logo.png" alt="" width="273" height="325" />{name ? <span className="hx-brand-name">HEXA<small>SYSTEMS</small></span> : null}</Link>; }
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
