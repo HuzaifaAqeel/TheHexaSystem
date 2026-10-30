@@ -7,6 +7,8 @@
 // No social profiles, addresses, ratings, testimonials or statistics are invented:
 // the site publishes none of those, so sameAs, address and aggregateRating are omitted.
 
+import { contactConfig } from './content';
+
 export const SITE_URL = "https://thehexasystems.com";
 export const ORG_ID = `${SITE_URL}/#organization`;
 
@@ -27,7 +29,7 @@ export function organizationJsonLd() {
     name: "Hexa Systems",
     url: `${SITE_URL}/`,
     logo: `${SITE_URL}/logo.png`,
-    email: "info@thehexasystems.com",
+    email: contactConfig.email,
     description:
       "Performance marketing plus AI automation for service businesses. Ads bring the leads. AI answers every one of them.",
     slogan: "We Turn Ad Spend Into Booked Jobs",

@@ -19,9 +19,12 @@ export const process = [
   { period: 'DAY 25', title: 'Make it yours.', text: 'Handover the connected system with tracking and reporting, ready for your team.' },
 ];
 
-// No receiving service was configured in the original website. Never simulate success.
+// Receiving inbox for form notifications. Delivery is via the Resend server
+// function in contact-request.server.ts (RESEND_API_KEY in Vercel env).
+// Until that key is set, forms fall back to an email draft and must never
+// simulate success.
 export const contactConfig = {
-  email: 'info@thehexasystems.com',
+  email: 'thehexasystems@gmail.com',
   bookingUrl: '', // Set only to an authorized, working scheduler URL.
 };
 

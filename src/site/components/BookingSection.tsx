@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock3 } from 'lucide-react';
 import { contactConfig } from '../content';
+import { sendContactRequest } from '../contact-request.server';
 import { Button } from '@/components/ui/button';
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -28,6 +29,8 @@ export default function BookingSection({ embedded = false }: { embedded?: boolea
   const [time, setTime] = useState<string | null>(null);
   const [step, setStep] = useState<'date' | 'time' | 'details'>('date');
   const [draft, setDraft] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [errorNote, setErrorNote] = useState('');
 
   const weeks = useMemo(() => {
     const first = new Date(view.getFullYear(), view.getMonth(), 1);
@@ -47,14 +50,43 @@ export default function BookingSection({ embedded = false }: { embedded?: boolea
 
   const pickDate = (d: Date) => { setDate(d); setTime(null); setStep('time'); };
   const pickTime = (t: string) => { setTime(t); setStep('details'); };
-  const reset = () => { setDate(null); setTime(null); setStep('date'); setDraft(''); };
+  const reset = () => { setDate(null); setTime(null); setStep('date'); setDraft(''); setStatus('idle'); setErrorNote(''); };
 
-  const confirm = (e: React.FormEvent<HTMLFormElement>) => {
+  const confirm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!date || !time) return;
-    const data = new FormData(e.currentTarget);
-    const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nTime zone: ${data.get('timezone')}\n\nRequested strategy call:\n${formatDay(date)} at ${time}\n\n(Preferred time — please confirm availability.)`;
-    setDraft(`mailto:${contactConfig.email}?subject=${encodeURIComponent('Strategy call request — Hexa Systems')}&body=${encodeURIComponent(body)}`);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '');
+    const email = String(data.get('email') || '');
+    const timezone = String(data.get('timezone') || '');
+    const body = `Name: ${name}\nEmail: ${email}\nTime zone: ${timezone}\n\nRequested strategy call:\n${formatDay(date)} at ${time}\n\n(Preferred time — please confirm availability.)`;
+    const mailto = `mailto:${contactConfig.email}?subject=${encodeURIComponent('Strategy call request — Hexa Systems')}&body=${encodeURIComponent(body)}`;
+    setStatus('sending');
+    setDraft('');
+    setErrorNote('');
+    try {
+      const result = await sendContactRequest({
+        data: { kind: 'call-request', name, email, timezone, date: formatDay(date), time },
+      });
+      if (result.ok) {
+        setStatus('sent');
+        form.reset();
+        return;
+      }
+      // Never claim a booking that did not happen. Fall back to the email draft.
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote(
+        result.reason === 'email_not_configured'
+          ? 'Email delivery is not set up on the server yet, so your request was not sent automatically.'
+          : 'Something went wrong sending your request, so it was not sent automatically.',
+      );
+    } catch {
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote('Something went wrong sending your request, so it was not sent automatically.');
+    }
   };
 
   return (
@@ -123,12 +155,17 @@ export default function BookingSection({ embedded = false }: { embedded?: boolea
                 <label>YOUR NAME *<input name="name" autoComplete="name" placeholder="John Smith" required maxLength={120} /></label>
                 <label>EMAIL ADDRESS *<input type="email" name="email" autoComplete="email" placeholder="john@company.com" required maxLength={254} /></label>
                  <label>TIME ZONE *<input name="timezone" placeholder="e.g. Karachi (UTC+5)" required maxLength={100} /></label>
-                 <Button type="submit" className="hx-book-confirm hx-button hx-primary">Prepare Call Request<ArrowRight size={17} /></Button>
-                <small className="hx-book-note">This prepares an email in your own email app with your requested time. Nothing is booked until we confirm with you.</small>
+                 <Button type="submit" className="hx-book-confirm hx-button hx-primary" disabled={status === 'sending'}>{status === 'sending' ? 'Sending…' : 'Send Call Request'}<ArrowRight size={17} /></Button>
+                <small className="hx-book-note">Your request is sent to the Hexa Systems team. Nothing is booked until we confirm your time by email.</small>
               </form>
-              {draft && (
+              {status === 'sent' && (
                 <div className="hx-book-draft" role="status">
-                  <p>Your request is ready. Open it in your email app, review it, and send it — we’ll reply to confirm your time.</p>
+                  <p>Request sent. We will reply to the email address you gave to confirm your time.</p>
+                </div>
+              )}
+              {status === 'error' && draft && (
+                <div className="hx-book-draft" role="status">
+                  <p>{errorNote} Your request is ready as an email draft instead. Open it in your email app, review it, and send it — we’ll reply to confirm your time.</p>
                   <a href={draft}>Open Email Draft ↗</a>
                 </div>
               )}
