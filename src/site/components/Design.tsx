@@ -54,8 +54,20 @@ export function stepFromProgress(progress: number, count = 6) {
 }
 export function Workflow() {
   const [active, setActive] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
+  // On mobile the pinned scroll effect is disabled entirely: the section is
+  // a plain vertical list, so no step is ever hidden or skipped by scroll
+  // progress, and nothing can overflow into the next section.
   useEffect(() => {
+    const mq = window.matchMedia('(max-width: 900px)');
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+  useEffect(() => {
+    if (isMobile) return;
     const track = trackRef.current;
     if (!track) return;
     let frame = 0;
@@ -71,7 +83,7 @@ export function Workflow() {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); if (frame) cancelAnimationFrame(frame); };
-  }, []);
+  }, [isMobile]);
   const steps = ['Ad campaign', 'Lead capture', 'AI response', 'Qualification', 'Appointment', 'Reporting'];
   const descriptions = ['Reach prospective customers with focused Meta ad campaigns built around the jobs you want more of.', 'Every ad click lands on a focused page with one clear next step, and every inquiry is captured.', 'AI answers inbound calls and messages right away, so no new lead waits or goes cold.', 'Each inquiry is understood and qualified before it reaches your calendar.', 'Qualified leads book straight into your calendar, with reminders in the same connected workflow.', 'See leads, bookings and revenue together in clear weekly reporting.'];
   return <section className="hx-workflow hx-pin" ref={trackRef} style={{ ['--hx-steps' as string]: steps.length }}>
@@ -82,7 +94,7 @@ export function Workflow() {
         <p>Your ads shouldn’t end at the click. We connect everything that happens next.</p>
         <CTA secondary to="/services">See the whole process</CTA>
       </div>
-      <div className="hx-pin-cards">{steps.map((step, i) => { const depth = active - i; return <article key={step} className={`hx-pin-card ${i === active ? 'is-active' : ''} ${i > active ? 'is-next' : ''}`} style={{ ['--depth' as string]: Math.max(0, depth), zIndex: i }} aria-hidden={i > active}>
+      <div className="hx-pin-cards">{steps.map((step, i) => { const depth = active - i; return <article key={step} className={`hx-pin-card ${!isMobile && i === active ? 'is-active' : ''} ${!isMobile && i > active ? 'is-next' : ''}`} style={{ ['--depth' as string]: Math.max(0, depth), zIndex: i }} aria-hidden={!isMobile && i > active}>
         <div className="hx-pin-card-top"><span>STEP 0{i + 1}</span></div><img className="hx-pin-3d" src={step3d[i] ?? st1} alt="" aria-hidden="true" width={816} height={816} loading="lazy" />
         <h3>{step}</h3><p>{descriptions[i]}</p>
       </article>; })}</div>

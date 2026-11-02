@@ -438,3 +438,19 @@ html{scroll-behavior:smooth}body{margin:0;background:var(--hx-paper);color:var(-
 @media(prefers-reduced-motion:reduce){.hx-pin-3d{animation:none}}
 .hx-footer-brand .hx-brand-symbol{width:96px;height:113px}
 @media(max-width:700px){.hx-footer-brand .hx-brand-symbol{width:72px;height:85px}}
+
+/* Mobile Process (Workflow) fix — must stay AFTER the .hx-pin-cards{height:480px}
+   rule above, which otherwise overrides the mobile height:auto and locks the
+   6-card list into a 480px box, overflowing into the next section. On mobile
+   the pinned scroll effect is off (see Design.tsx), so every step is a plain
+   list item: relative, fully opaque, in order, with no hiding of past steps. */
+@media(max-width:900px){
+  .hx-pin{height:auto;padding:80px 0}
+  .hx-pin-stage{position:static;height:auto;overflow:visible}
+  .hx-pin-grid{grid-template-columns:1fr;gap:36px}
+  .hx-pin-cards{height:auto;display:grid;gap:16px}
+  .hx-pin-card,.hx-pin-card.is-next,.hx-pin-card:not(.is-active):not(.is-next),.hx-pin-card.is-active{position:relative;inset:auto;transform:none;opacity:1;pointer-events:auto;padding:28px}
+  .hx-pin-card>*{opacity:1}
+  .hx-pin-card h3{font-size:28px}
+  .hx-pin-card p{font-size:var(--hx-small-text)}
+}
