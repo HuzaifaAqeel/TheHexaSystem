@@ -454,3 +454,12 @@ html{scroll-behavior:smooth}body{margin:0;background:var(--hx-paper);color:var(-
   .hx-pin-card h3{font-size:28px}
   .hx-pin-card p{font-size:var(--hx-small-text)}
 }
+
+/* Calendly inline booking widget (2026-11-05): white Calendly card inside
+   the dark booking panel; fallback link stays readable on the dark panel. */
+.hx-calendly .calendly-inline-widget { border-radius: 18px; overflow: hidden; background: var(--hx-white); }
+.hx-calendly-fallback { text-align: center; color: color-mix(in srgb, var(--hx-white) 65%, transparent); font-size: var(--hx-small-text); margin: 18px 0 0; }
+.hx-calendly-fallback a { font-weight: 700; color: var(--hx-lime); }
+.hx-book-layout .hx-calendly .calendly-inline-widget { border: 1px solid var(--hx-edge); }
+.hx-book-layout .hx-calendly-fallback { color: var(--hx-muted); }
+.hx-book-layout .hx-calendly-fallback a { color: var(--hx-forest); }

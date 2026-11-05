@@ -47,31 +47,17 @@ describe('Contact requests', () => {
     expect(screen.getByText(/was not sent automatically/)).toBeTruthy();
   });
 
-  it('sends the requested date, time and timezone as a call request, not a confirmed booking', async () => {
-    sendMock.mockResolvedValue({ ok: true });
-    vi.useFakeTimers();
-    vi.setSystemTime(new Date(2026, 9, 29, 12));
+  it('books calls on Calendly, not through the old in-site request form', () => {
+    expect(contactConfig.bookingUrl).toBe('https://calendly.com/thehexasystems/30min');
     render(<BookingSection embedded />);
-    expect(screen.getByRole('gridcell', { name: 'Wed Oct 28 2026' })).toBeDisabled();
-    fireEvent.click(screen.getByRole('gridcell', { name: 'Fri Oct 30 2026' }));
-    fireEvent.click(screen.getAllByRole('button', { name: /\d+:00 [AP]M/ })[0] as HTMLElement);
-    // Switch back to real timers before the async send, so the success
-    // message can be awaited (fake timers block waitFor/findBy polling).
-    vi.useRealTimers();
-    fireEvent.change(screen.getByLabelText('YOUR NAME *'), { target: { value: 'Request Test' } });
-    fireEvent.change(screen.getByLabelText('EMAIL ADDRESS *'), { target: { value: 'request@example.com' } });
-    fireEvent.change(screen.getByLabelText('TIME ZONE *'), { target: { value: 'Karachi (UTC+5)' } });
-    const form = document.querySelector('form');
-    if (!form) throw new Error('Missing call form');
-    fireEvent.submit(form);
-    await screen.findByText(/Request sent\./);
-    expect(sendMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        data: expect.objectContaining({ kind: 'call-request', timezone: 'Karachi (UTC+5)' }),
-      }),
-    );
-    const call = sendMock.mock.calls[0][0].data;
-    expect(call.date).toContain('OCT 30, 2026');
-    expect(screen.getByText(/Nothing is booked until we confirm/)).toBeTruthy();
+    const widget = document.querySelector('.calendly-inline-widget');
+    expect(widget).toBeTruthy();
+    expect(widget?.getAttribute('data-url')).toBe('https://calendly.com/thehexasystems/30min');
+    const link = screen.getByRole('link', { name: /Open the booking calendar in Calendly/ });
+    expect(link).toHaveAttribute('href', 'https://calendly.com/thehexasystems/30min');
+    expect(link).toHaveAttribute('target', '_blank');
+    // No fake calendar and no booking-request form remain.
+    expect(document.querySelector('form')).toBeNull();
+    expect(screen.getByText(/confirmed straight away/)).toBeTruthy();
   });
 });

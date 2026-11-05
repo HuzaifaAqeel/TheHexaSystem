@@ -25,7 +25,10 @@ export const process = [
 // simulate success.
 export const contactConfig = {
   email: 'thehexasystems@gmail.com',
-  bookingUrl: '', // Set only to an authorized, working scheduler URL.
+  // Calendly 30-min event supplied by Huzaifa 2026-11-05. Bookings happen
+  // on Calendly (inline widget in BookingSection); the site no longer
+  // fakes availability or takes booking requests by email.
+  bookingUrl: 'https://calendly.com/thehexasystems/30min',
 };
 
 export function pageMeta(title: string, description: string, canonical?: string) {
