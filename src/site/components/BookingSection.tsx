@@ -3,6 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { ArrowLeft, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Clock3 } from 'lucide-react';
 import { contactConfig } from '../content';
 import { sendContactRequest } from '../contact-request.server';
+import { sendViaFormSubmit } from '../formsubmit';
 import { Button } from '@/components/ui/button';
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -65,27 +66,35 @@ export default function BookingSection({ embedded = false }: { embedded?: boolea
     setStatus('sending');
     setDraft('');
     setErrorNote('');
+    const payload = { kind: 'call-request' as const, name, email, timezone, date: formatDay(date), time };
+    const fallbackToDraft = () => {
+      // Never claim a booking that did not happen. Fall back to the email draft.
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote('Something went wrong sending your request, so it was not sent automatically.');
+    };
     try {
-      const result = await sendContactRequest({
-        data: { kind: 'call-request', name, email, timezone, date: formatDay(date), time },
-      });
+      const result = await sendContactRequest({ data: payload });
       if (result.ok) {
         setStatus('sent');
         form.reset();
         return;
       }
-      // Never claim a booking that did not happen. Fall back to the email draft.
-      setStatus('error');
-      setDraft(mailto);
-      setErrorNote(
-        result.reason === 'email_not_configured'
-          ? 'Email delivery is not set up on the server yet, so your request was not sent automatically.'
-          : 'Something went wrong sending your request, so it was not sent automatically.',
-      );
+      // Resend is not configured (or failed): try the no-key FormSubmit
+      // fallback before giving up to an email draft.
+      if (await sendViaFormSubmit(payload)) {
+        setStatus('sent');
+        form.reset();
+        return;
+      }
+      fallbackToDraft();
     } catch {
-      setStatus('error');
-      setDraft(mailto);
-      setErrorNote('Something went wrong sending your request, so it was not sent automatically.');
+      if (await sendViaFormSubmit(payload)) {
+        setStatus('sent');
+        form.reset();
+        return;
+      }
+      fallbackToDraft();
     }
   };
 

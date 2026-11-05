@@ -6,6 +6,7 @@ import { contactConfig, services } from '../content';
 import { Eyebrow } from '../components/Design';
 import BookingSection from '../components/BookingSection';
 import { sendContactRequest } from '../contact-request.server';
+import { sendViaFormSubmit } from '../formsubmit';
 
 export function InquiryForm({ booking = false }: { booking?: boolean }) {
   const serviceLabel = useId();
@@ -27,27 +28,35 @@ export function InquiryForm({ booking = false }: { booking?: boolean }) {
     setStatus('sending');
     setDraft(null);
     setErrorNote('');
+    const payload = { kind: booking ? 'call-request' as const : 'inquiry' as const, name, email, company, service, message };
+    const fallbackToDraft = () => {
+      // Never claim a send that did not happen. Fall back to the email draft.
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote('Something went wrong sending your message, so it was not sent automatically.');
+    };
     try {
-      const result = await sendContactRequest({
-        data: { kind: booking ? 'call-request' : 'inquiry', name, email, company, service, message },
-      });
+      const result = await sendContactRequest({ data: payload });
       if (result.ok) {
         setStatus('sent');
         form.reset();
         return;
       }
-      // Never claim a send that did not happen. Fall back to the email draft.
-      setStatus('error');
-      setDraft(mailto);
-      setErrorNote(
-        result.reason === 'email_not_configured'
-          ? 'Email delivery is not set up on the server yet, so your message was not sent automatically.'
-          : 'Something went wrong sending your message, so it was not sent automatically.',
-      );
+      // Resend is not configured (or failed): try the no-key FormSubmit
+      // fallback before giving up to an email draft.
+      if (await sendViaFormSubmit(payload)) {
+        setStatus('sent');
+        form.reset();
+        return;
+      }
+      fallbackToDraft();
     } catch {
-      setStatus('error');
-      setDraft(mailto);
-      setErrorNote('Something went wrong sending your message, so it was not sent automatically.');
+      if (await sendViaFormSubmit(payload)) {
+        setStatus('sent');
+        form.reset();
+        return;
+      }
+      fallbackToDraft();
     }
   };
 
