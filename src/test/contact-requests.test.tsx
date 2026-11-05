@@ -9,10 +9,9 @@ vi.mock('@tanstack/react-router', () => ({ Link: ({ children, to, ...props }: { 
 
 const sendMock = vi.fn();
 vi.mock('@/site/contact-request.server', () => ({ sendContactRequest: (...args: unknown[]) => sendMock(...args) }));
-const formSubmitMock = vi.fn();
-vi.mock('@/site/formsubmit', () => ({ sendViaFormSubmit: (...args: unknown[]) => formSubmitMock(...args) }));
 
-afterEach(() => { cleanup(); vi.useRealTimers(); sendMock.mockReset(); formSubmitMock.mockReset(); formSubmitMock.mockResolvedValue(false); });
+
+afterEach(() => { cleanup(); vi.useRealTimers(); sendMock.mockReset(); });
 
 describe('Contact requests', () => {
   it('routes shared growth calls to Contact', () => {
@@ -46,19 +45,6 @@ describe('Contact requests', () => {
     await waitFor(() => expect(screen.getByRole('link', { name: /Open Email Draft/ })).toBeTruthy());
     expect(screen.getByRole('link', { name: /Open Email Draft/ }).getAttribute('href')).toMatch(/^mailto:thehexasystems@gmail\.com\?/);
     expect(screen.getByText(/was not sent automatically/)).toBeTruthy();
-  });
-
-  it('sends via the FormSubmit fallback when Resend is not configured', async () => {
-    sendMock.mockResolvedValue({ ok: false, reason: 'email_not_configured' });
-    formSubmitMock.mockResolvedValue(true);
-    const { container } = render(<InquiryForm />);
-    fireEvent.change(screen.getByLabelText('Your name'), { target: { value: 'Request Test' } });
-    fireEvent.change(screen.getByLabelText('Email address'), { target: { value: 'request@example.com' } });
-    const form = container.querySelector('form');
-    if (!form) throw new Error('Missing inquiry form');
-    fireEvent.submit(form);
-    await waitFor(() => expect(screen.getByText(/Sent\. Thanks/)).toBeTruthy());
-    expect(formSubmitMock).toHaveBeenCalled();
   });
 
   it('sends the requested date, time and timezone as a call request, not a confirmed booking', async () => {

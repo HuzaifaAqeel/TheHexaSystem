@@ -6,7 +6,6 @@ import { contactConfig, services } from '../content';
 import { Eyebrow } from '../components/Design';
 import BookingSection from '../components/BookingSection';
 import { sendContactRequest } from '../contact-request.server';
-import { sendViaFormSubmit } from '../formsubmit';
 
 export function InquiryForm({ booking = false }: { booking?: boolean }) {
   const serviceLabel = useId();
@@ -29,12 +28,6 @@ export function InquiryForm({ booking = false }: { booking?: boolean }) {
     setDraft(null);
     setErrorNote('');
     const payload = { kind: booking ? 'call-request' as const : 'inquiry' as const, name, email, company, service, message };
-    const fallbackToDraft = () => {
-      // Never claim a send that did not happen. Fall back to the email draft.
-      setStatus('error');
-      setDraft(mailto);
-      setErrorNote('Something went wrong sending your message, so it was not sent automatically.');
-    };
     try {
       const result = await sendContactRequest({ data: payload });
       if (result.ok) {
@@ -42,21 +35,18 @@ export function InquiryForm({ booking = false }: { booking?: boolean }) {
         form.reset();
         return;
       }
-      // Resend is not configured (or failed): try the no-key FormSubmit
-      // fallback before giving up to an email draft.
-      if (await sendViaFormSubmit(payload)) {
-        setStatus('sent');
-        form.reset();
-        return;
-      }
-      fallbackToDraft();
+      // Never claim a send that did not happen. Fall back to the email draft.
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote(
+        result.reason === 'email_not_configured'
+          ? 'Email delivery is not set up on the server yet, so your message was not sent automatically.'
+          : 'Something went wrong sending your message, so it was not sent automatically.',
+      );
     } catch {
-      if (await sendViaFormSubmit(payload)) {
-        setStatus('sent');
-        form.reset();
-        return;
-      }
-      fallbackToDraft();
+      setStatus('error');
+      setDraft(mailto);
+      setErrorNote('Something went wrong sending your message, so it was not sent automatically.');
     }
   };
 
